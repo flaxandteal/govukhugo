@@ -1,0 +1,10 @@
+{{ define "main" }}
+
+<div class="govuk-body">
+    {{ partial "starches/map-filters" }}
+    {{ partial "starches/map" . }}
+</div>
+
+{{ .Content }}
+
+{{ end }}

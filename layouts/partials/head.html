@@ -39,6 +39,7 @@
 
   <!-- code syntax highlighting -->
   <link href="{{ "css/syntax.css" | absURL }}" rel="stylesheet">
+  <link href="{{ "css/asset.css" | absURL }}" rel="stylesheet">
 
   <script src="{{ "rmarkdown/jquery-3.6.0/jquery-3.6.0.min.js" | absURL }}"></script>
   
@@ -77,6 +78,8 @@
   <link href="{{ "css/rmarkdown.css" | absURL }}" rel="stylesheet" />
   <script src="{{ "js/papaparse.min.js" | absURL}}"></script>
   {{ end }}
+
+  {{- partial "starches/head.html" . -}}
 
   {{ with $.Site.Params.Govuk }}
   <meta property="og:image" content="{{ "images/govuk-opengraph-image.png" | absURL }}">
