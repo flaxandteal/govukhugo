@@ -1,6 +1,7 @@
 {{#if (equal sectionId "asset-related")}}
+<h2 id="heading-{{id}}">{{title}}</h2>
 <details class="govuk-details" {{#if initiallyExpanded}}open{{/if}}>
-  <summary class="govuk-details__summary" id="heading-{{id}}">
+  <summary class="govuk-details__summary">
     <span class="govuk-details__summary-text">{{title}}</span>
   </summary>
   <div class="govuk-details__text">
@@ -18,8 +19,9 @@
   </div>
 </details>
 {{ else if (equal title "Real Property Description (Lot on Plan)") }}
+<h2 id="heading-{{id}}">{{title}}</h2>
 <details class="govuk-details" open>
-  <summary class="govuk-details__summary" id="heading-{{id}}">
+  <summary class="govuk-details__summary">
     <span class="govuk-details__summary-text">{{title}}</span>
   </summary>
   <div class="govuk-details__text">
@@ -40,8 +42,9 @@
   </div>
 </details>
 {{else}}
+<h2 id="heading-{{id}}">{{title}}</h2>
 <details class="govuk-details" {{#if initiallyExpanded}}open{{/if}}>
-  <summary class="govuk-details__summary" id="heading-{{id}}">
+  <summary class="govuk-details__summary">
     <span class="govuk-details__summary-text">{{title}}</span>
   </summary>
   <div class="govuk-details__text">
