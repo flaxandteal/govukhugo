@@ -4,7 +4,7 @@
      <li>
         {{ if eq .Lang $.Site.Language.Lang }}
             <span>{{ .LanguageName }}</span>
-            <span class="hidden" id="currentLanguage">{{ .Lang }}</span>
+            <span class="map-hidden" id="currentLanguage">{{ .Lang }}</span>
         {{ else }}
             <a href="#" class="lang-switch" data-lang="{{ .Lang }}">
             {{ .LanguageName }}
