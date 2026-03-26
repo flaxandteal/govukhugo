@@ -1,11 +1,45 @@
 <nav aria-label="Language switcher">
-    <ul>
-        {{ range .Site.Languages }}
-        {{ if eq . $.Site.Language }}
-        <li><span aria-label="{{ i18n "ariaLanguage" }}{{ .LanguageName }}">{{ .LanguageName }}</span></li>
+  <ul>
+    {{ range .Site.Languages }}
+     <li>
+        {{ if eq .Lang $.Site.Language.Lang }}
+            <span>{{ .LanguageName }}</span>
+            <span class="hidden" id="currentLanguage">{{ .Lang }}</span>
         {{ else }}
-        <li><a title="{{ .LanguageName }}" href="{{ $.Site.BaseURL }}{{ .Lang }}/" aria-label="{{ i18n "ariaTranslation" }}{{ .LanguageName }}">{{ .LanguageName }}</a></li>
+            <a href="#" class="lang-switch" data-lang="{{ .Lang }}">
+            {{ .LanguageName }}
+            </a>
         {{ end }}
-        {{ end }}
-    </ul>
+    </li>
+    {{ end }}
+  </ul>
 </nav>
+
+<script>
+document.querySelectorAll(".lang-switch").forEach(link => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const targetLang = this.dataset.lang;
+
+    const currentUrl = new URL(window.location.href);
+    let pathSegments = currentUrl.pathname.split("/").filter(Boolean);
+
+    const languages = {{ jsonify .Site.Languages | safeJS }}.map(l => l.Lang);
+    const defaultLang = "{{ .Site.Language.Lang }}";
+    // Remove current language if present
+    if (languages.includes(pathSegments[0])) {
+      pathSegments.shift();
+    }
+
+    // Add prefix ONLY if target is NOT default language
+    if (targetLang !== 'en') {
+      pathSegments.unshift(targetLang);
+    }
+
+    const newPath = "/" + pathSegments.join("/");
+    const query = currentUrl.search;
+    window.location.href = newPath + query;
+  });
+});
+</script>
