@@ -3,7 +3,7 @@
         <div class="govuk-footer__meta">
             <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
 
-                <h2 class="govuk-visually-hidden">Support links</h2>
+                <h2 class="govuk-visually-hidden">{{ i18n "support_links" }}</h2>
                 <ul class="govuk-footer__inline-list">
 
                     {{ $currPage := . }}
@@ -11,48 +11,48 @@
                     {{ with .Site.Params.help }}
                     <li class="govuk-footer__inline-list-item">
                         <a class="govuk-footer__link" href="{{ relref  $currPage . }}">
-                            Help
+                            {{ i18n "help" }}
                         </a>
                     </li>
                     {{ end }}
                     {{ with .Site.Params.accessibility }}
                     <li class="govuk-footer__inline-list-item">
                         <a class="govuk-footer__link" href="{{ relref  $currPage . }}">
-                            Accessibility
+                            {{ i18n "accessibility" }}
                         </a>
                     </li>
                     {{ end }}
                     {{ with .Site.Params.privacy }}
                     <li class="govuk-footer__inline-list-item">
                         <a class="govuk-footer__link" href="{{ relref  $currPage . }}">
-                            Privacy
+                            {{ i18n "privacy" }}
                         </a>
                     </li>
                     {{ end }}
                     {{ with .Site.Params.cookies }}
                     <li class="govuk-footer__inline-list-item">
                         <a class="govuk-footer__link" href="{{ relref  $currPage . }}">
-                            Cookies
+                            {{ i18n "cookies" }}
                         </a>
                     </li>
                     {{ end }}
                     {{ with .Site.Params.contact }}
                     <li class="govuk-footer__inline-list-item">
                         <a class="govuk-footer__link" href="{{ relref  $currPage . }}">
-                            Contact
+                            {{ i18n "contact" }}
                         </a>
                     </li>
                     {{ end }}
                     {{ with .Site.Params.terms }}
                     <li class="govuk-footer__inline-list-item">
                         <a class="govuk-footer__link" href="{{ relref  $currPage . }}">
-                            Terms
+                            {{ i18n "terms" }}
                         </a>
                     </li>
                     {{ end }}
                     {{ with .Site.Params.builtby }}
                     <li class="govuk-footer__inline-list-item">
-                        Built by <a class="govuk-footer__link" href="{{ $.Site.Params.builtbyurl }}">
+                        {{ i18n "built_by" }} <a class="govuk-footer__link" href="{{ $.Site.Params.builtbyurl }}">
                             {{ . }}
                         </a>
                     </li>
@@ -66,17 +66,17 @@
                         d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145" />
                 </svg>
                 <span class="govuk-footer__licence-description">
-                    All content is available under the
+                    {{ i18n "all_content" }} 
                     <a class="govuk-footer__link"
                         href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
-                        rel="license">Open Government Licence v3.0</a>, except where otherwise stated
+                        rel="license">{{ i18n "open_government_license" }}</a>, {{ i18n "except_where_stated"}}
                 </span>
             </div>
             <div class="govuk-footer__meta-item">
                 <a style="background-image:url({{ .Site.BaseURL }}images/govuk-crest.png);"
                     class="govuk-footer__link govuk-footer__copyright-logo"
                     href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/">©
-                    Crown copyright </a>
+                    {{ i18n "crown_copyright" }} </a>
             </div>
         </div>
     </div>

@@ -1,0 +1,84 @@
+<nav aria-label="Language switcher">
+  <ul>
+    {{ range .Site.Languages }}
+     <li>
+        {{ if eq .Lang $.Site.Language.Lang }}
+            <span>{{ .LanguageName }}</span>
+            <span class="map-hidden" id="currentLanguage">{{ .Lang }}</span>
+        {{ else }}
+            <a href="#" class="lang-switch" data-lang="{{ .Lang }}">
+            {{ .LanguageName }}
+            </a>
+        {{ end }}
+    </li>
+    {{ end }}
+  </ul>
+</nav>
+
+<script>
+
+var getFirstBrowserLanguage = function () {
+    var nav = window.navigator,
+    browserLanguagePropertyKeys = ['language', 'browserLanguage', 'systemLanguage', 'userLanguage'],
+    i,
+    language
+
+    if (Array.isArray(nav.languages)) {
+    for (i = 0; i < nav.languages.length; i++) {
+        language = nav.languages[i]
+          if (language && language.length) {
+            return language.split('-')[0];
+          }
+      }
+    }
+
+    // support for other well known properties in browsers
+    for (i = 0; i < browserLanguagePropertyKeys.length; i++) {
+      language = nav[browserLanguagePropertyKeys[i]]
+      if (language && language.length) {
+          return language.split('-')[0];
+      }
+    }
+  return 'en'
+};
+
+var sendUserToBrowserLanguage = function() {
+  const browserLang = getFirstBrowserLanguage();
+  const languages = {{ jsonify .Site.Languages | safeJS }}.map(l => l.Lang);
+  if (browserLang !== 'en' && languages.includes(browserLang)) {
+    window.location.href = '/' + browserLang + window.location.pathname + window.location.search;
+  }
+}
+
+document.querySelectorAll(".lang-switch").forEach(link => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    const targetLang = this.dataset.lang;
+    const currentUrl = new URL(window.location.href);
+    let pathSegments = currentUrl.pathname.split("/").filter(Boolean);
+
+    const languages = {{ jsonify .Site.Languages | safeJS }}.map(l => l.Lang);
+    const defaultLang = "{{ .Site.Language.Lang }}";
+    // Remove current language if present
+    if (languages.includes(pathSegments[0])) {
+      pathSegments.shift();
+    }
+
+    // Add prefix ONLY if target is NOT default language
+    if (targetLang !== 'en') {
+      pathSegments.unshift(targetLang);
+    }
+
+    const newPath = "/" + pathSegments.join("/");
+    const query = currentUrl.search;
+    window.location.href = newPath + query;
+  });
+});
+
+// Redirect users to their browser language on first visit to the homepage
+if (!sessionStorage.getItem('languageRedirectDone')) {
+  sendUserToBrowserLanguage();
+  sessionStorage.setItem('languageRedirectDone', 'true');
+}
+</script>
